@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+ini_set('session.use_cookies', 1);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', 1); // HTTPS (Vercel)
+ini_set('session.use_strict_mode', 1);
+
 /**
  * Configuration du site - Version JWT pour Vercel
  */
