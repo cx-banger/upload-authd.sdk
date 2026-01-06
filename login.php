@@ -3,23 +3,33 @@ require_once 'config.php';
 
 $error = '';
 
+// Vérifier si déjà authentifié
+$token = $_COOKIE['auth_token'] ?? '';
+if (verifyJWT($token)) {
+    header('Location: /upload.php');
+    exit;
+}
+
 // Traitement du formulaire de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     
     if ($password === ACCESS_PASSWORD) {
-        $_SESSION['authenticated'] = true;
-        header('Location: upload.php');
+        // Créer le JWT avec expiration de 24h
+        $payload = [
+            'authenticated' => true,
+            'iat' => time(),           // Issued at
+            'exp' => time() + 86400    // Expire dans 24h
+        ];
+        
+        $token = generateJWT($payload);
+        setAuthCookie($token);
+        
+        header('Location: /upload.php');
         exit;
     } else {
         $error = "Mot de passe incorrect.";
     }
-}
-
-// Si déjà connecté, rediriger vers upload.php
-if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-    header('Location: upload.php');
-    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -39,7 +49,7 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         
-        <form method="POST" action="login.php">
+        <form method="POST" action="/login.php">
             <div class="form-group">
                 <label for="password">Mot de passe :</label>
                 <input type="password" name="password" id="password" required autofocus>
