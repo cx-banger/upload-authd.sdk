@@ -6,14 +6,13 @@
 // Mot de passe commun pour l'accès au site
 define('ACCESS_PASSWORD', getenv('ACCESS_PASSWORD') ?: 'admin123');
 
-// IMPORTANT : Générez une clé secrète forte et unique !
-// Utilisez : openssl rand -base64 32
+// Clé secrète JWT
 define('JWT_SECRET', getenv('JWT_SECRET') ?: 't4hdQz7RhfmjXbqSZCvJbwnItfUbHFucakO/709pj0w=');
 
 // Configuration Supabase
-define('SUPABASE_URL', getenv('https://hrzmagjjobctkfxayokt.supabase.co'));
-define('SUPABASE_SERVICE_ROLE_KEY', getenv('SUPABASE_SERVICE_ROLE_KEY'));
-define('SUPABASE_BUCKET_NAME', 'uploads');
+define('SUPABASE_URL', getenv('SUPABASE_URL') ?: 'https://hrzmagjjobctkfxayokt.supabase.co');
+define('SUPABASE_SERVICE_ROLE_KEY', getenv('SUPABASE_SERVICE_ROLE_KEY') ?: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhyem1hZ2pqb2JjdGtmeGF5b2t0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODkwMzIxNiwiZXhwIjoyMDc0NDc5MjE2fQ.vTOT_WPZoAS9qy_1mXkgCemwWBTNYjo1unSeOYYxpS8');
+define('SUPABASE_BUCKET_NAME', getenv('SUPABASE_BUCKET_NAME') ?: 'sons');
 
 // Paramètres d'upload
 define('MAX_FILE_SIZE', 50 * 1024 * 1024); // 50 Mo
