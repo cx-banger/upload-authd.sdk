@@ -88,7 +88,7 @@ function check_auth() {
     $payload = verifyJWT($token);
     
     if (!$payload || !isset($payload['authenticated']) || $payload['authenticated'] !== true) {
-        header('Location: /login.php');
+        header('Location: /api/login.php');
         exit;
     }
     
