@@ -8,10 +8,10 @@ define('ACCESS_PASSWORD', 'admin123');
 
 // IMPORTANT : Générez une clé secrète forte et unique !
 // Utilisez : openssl rand -base64 32
-define('JWT_SECRET', 'CHANGEZ_CETTE_CLE_SECRETE_TRES_LONGUE_ET_ALEATOIRE_32_CARACTERES_MINIMUM');
+define('JWT_SECRET', 't4hdQz7RhfmjXbqSZCvJbwnItfUbHFucakO/709pj0w=');
 
 // Configuration Supabase
-define('SUPABASE_URL', 'https://VOTRE_PROJET_ID.supabase.co');
+define('SUPABASE_URL', 'https://hrzmagjjobctkfxayokt.supabase.co');
 define('SUPABASE_SERVICE_ROLE_KEY', 'VOTRE_SERVICE_ROLE_KEY');
 define('SUPABASE_BUCKET_NAME', 'uploads');
 
