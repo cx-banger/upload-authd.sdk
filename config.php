@@ -4,15 +4,15 @@
  */
 
 // Mot de passe commun pour l'accès au site
-define('ACCESS_PASSWORD', 'admin123');
+define('ACCESS_PASSWORD', getenv('ACCESS_PASSWORD') ?: 'admin123');
 
 // IMPORTANT : Générez une clé secrète forte et unique !
 // Utilisez : openssl rand -base64 32
-define('JWT_SECRET', 't4hdQz7RhfmjXbqSZCvJbwnItfUbHFucakO/709pj0w=');
+define('JWT_SECRET', getenv('JWT_SECRET') ?: 't4hdQz7RhfmjXbqSZCvJbwnItfUbHFucakO/709pj0w=');
 
 // Configuration Supabase
-define('SUPABASE_URL', 'https://hrzmagjjobctkfxayokt.supabase.co');
-define('SUPABASE_SERVICE_ROLE_KEY', 'VOTRE_SERVICE_ROLE_KEY');
+define('SUPABASE_URL', getenv('https://hrzmagjjobctkfxayokt.supabase.co'));
+define('SUPABASE_SERVICE_ROLE_KEY', getenv('SUPABASE_SERVICE_ROLE_KEY'));
 define('SUPABASE_BUCKET_NAME', 'uploads');
 
 // Paramètres d'upload
