@@ -1,11 +1,8 @@
-/**
- * <?php
- * header("Location: login.php");
- * exit;
- * ?> )
-*/
-
 <?php
+ /** header("Location: login.php");
+ *   exit;
+ *   ?> )
+*/
 require __DIR__ . '/config.php';
 
 if (!isset($_SESSION['auth'])) {
