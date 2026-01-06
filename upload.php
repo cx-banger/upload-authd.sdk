@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['files'])) {
     <div class="container">
         <div class="header">
             <h1>Upload de fichiers</h1>
-            <a href="logout.php" class="logout-btn">Déconnexion</a>
+            <a href="/logout.php" class="logout-btn">Déconnexion</a>
         </div>
         
         <p>Sélectionnez des images (jpg, png, gif), documents (pdf) ou sons (mp3, wav, ogg).</p>
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['files'])) {
             </div>
         <?php endif; ?>
 
-        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+        <form id="uploadForm" method="POST" enctype="multipart/form-data" action="/upload.php">
             <div class="form-group">
                 <input type="file" name="files[]" id="fileInput" multiple required>
             </div>
