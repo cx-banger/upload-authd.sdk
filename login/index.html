@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de fichiers - Supabase</title>
+    <link rel="stylesheet" href="./login/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Upload de fichiers</h1>
+            <a href="logout.php" class="logout-btn">Déconnexion</a>
+        </div>
+        
+        <p>Sélectionnez des images (jpg, png, gif), documents (pdf) ou sons (mp3, wav, ogg).</p>
+        <p>Taille max : 50 Mo par fichier.</p>
+
+        
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" name="files[]" id="fileInput" multiple required>
+            </div>
+            <div id="clientError" class="error" style="display:none;"></div>
+            <button type="submit" id="submitBtn">Uploader les fichiers</button>
+        </form>
+        
+        <div id="progressArea" style="display:none; margin-top: 20px;">
+            <p>Upload en cours...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

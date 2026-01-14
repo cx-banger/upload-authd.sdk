@@ -1,0 +1,121 @@
+/* Style Ultra Rétro - Web 1.0 / Windows 95 */
+body {
+    background-color: #008080; /* Vert Teal classique Windows 95 */
+    font-family: "MS Sans Serif", Arial, sans-serif;
+    color: #000;
+    margin: 50px;
+}
+
+.container {
+    background-color: #c0c0c0; /* Gris Windows */
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    padding: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 0px #000;
+}
+
+h1 {
+    background: linear-gradient(90deg, #000080, #1084d0); /* Barre de titre bleue */
+    color: white;
+    font-size: 14px;
+    margin: -10px -10px 15px -10px;
+    padding: 3px 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+h1::before {
+    content: "💾";
+    margin-right: 8px;
+}
+
+p {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px inset #fff;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+input[type="password"], input[type="file"] {
+    background-color: #fff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #dfdfdf;
+    border-bottom: 2px solid #dfdfdf;
+    padding: 3px;
+    font-size: 12px;
+    width: 90%;
+}
+
+button {
+    background-color: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    padding: 5px 15px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+button:active {
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    padding: 6px 14px 4px 16px;
+}
+
+.error {
+    background-color: #ff0000;
+    color: #fff;
+    border: 2px solid #800000;
+    padding: 5px;
+    font-size: 11px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.success {
+    background-color: #00ff00;
+    color: #000;
+    border: 2px solid #008000;
+    padding: 5px;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.logout-btn {
+    color: #000;
+    font-size: 11px;
+    text-decoration: underline;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Petit bonus : curseur d'attente rétro */
+.loading {
+    cursor: wait;
+}
