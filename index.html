@@ -12,13 +12,31 @@
         <p>Veuillez saisir le mot de passe pour accéder à l'outil d'upload.</p>
         
                 
-        <form method="POST" action="login.php">
-            <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" name="password" id="password" required autofocus>
-            </div>
-            <button type="submit">Se connecter</button>
-        </form>
+        <form onsubmit="return checkPassword()">
+          <div class="form-group">
+              <label for="password">Mot de passe :</label>
+              <input type="password" id="password" required>
+          </div>
+          <button type="submit">Se connecter</button>
+      </form>
+
+      <script>
+      function checkPassword() {
+          const password = document.getElementById("password").value;
+          const input = document.getElementById("password");
+          const error = document.getElementById("error");
+
+          if (password === "admin123") {
+              window.location.href = "login/index.html";
+          } else {
+              alert("Mot de passe incorrect");
+              input.value = "";      // ⬅️ efface la saisie
+              input.focus();         // ⬅️ remet le curseur
+          }
+          return false;
+      }
+      </script>
+
     </div>
 </body>
 </html>
