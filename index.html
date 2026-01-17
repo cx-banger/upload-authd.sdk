@@ -3,40 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Upload Supabase</title>
+    <title>Upload Supabase - GitHub Pages</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <!-- Page de connexion -->
+    <div id="loginPage" class="container">
         <h1>Connexion</h1>
         <p>Veuillez saisir le mot de passe pour accéder à l'outil d'upload.</p>
         
-                
-        <form onsubmit="return checkPassword()">
-          <div class="form-group">
-              <label for="password">Mot de passe :</label>
-              <input type="password" id="password" required>
-          </div>
-          <button type="submit">Se connecter</button>
-      </form>
-
-      <script>
-      function checkPassword() {
-          const password = document.getElementById("password").value;
-          const input = document.getElementById("password");
-          const error = document.getElementById("error");
-
-          if (password === "admin123") {
-              window.location.href = "login/index.html";
-          } else {
-              alert("Mot de passe incorrect");
-              input.value = "";      // ⬅️ efface la saisie
-              input.focus();         // ⬅️ remet le curseur
-          }
-          return false;
-      }
-      </script>
-
+        <div id="loginError" class="error" style="display:none;"></div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" required autofocus>
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
     </div>
+
+    <!-- Page d'upload (cachée par défaut) -->
+    <div id="uploadPage" class="container" style="display:none;">
+        <div class="header">
+            <h1>Upload de fichiers</h1>
+            <a href="#" id="logoutBtn" class="logout-btn">Déconnexion</a>
+        </div>
+        
+        <p>Sélectionnez des images (jpg, png, gif), documents (pdf) ou sons (mp3, wav, ogg).</p>
+        <p>Taille max : 50 Mo par fichier.</p>
+
+        <div id="results" style="display:none;"></div>
+
+        <form id="uploadForm">
+            <div class="form-group">
+                <input type="file" name="files" id="fileInput" multiple required>
+            </div>
+            <div id="clientError" class="error" style="display:none;"></div>
+            <button type="submit" id="submitBtn">Uploader les fichiers</button>
+        </form>
+        
+        <div id="progressArea" style="display:none; margin-top: 20px;">
+            <p id="progressText">Upload en cours...</p>
+            <div style="background:#fff; border:2px inset #808080; height:20px; margin-top:10px;">
+                <div id="progressBar" style="background:#000080; height:100%; width:0%; transition:width 0.3s;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
