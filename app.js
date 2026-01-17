@@ -119,10 +119,10 @@ async function uploadFiles(files) {
     
     for (const file of files) {
         try {
-            const uniqueName = generateUniqueFilename(file.name);
+            const filename = generateUniqueFilename(file.name);
             progressText.textContent = `Upload de ${file.name}...`;
             
-            const { data, error } = await uploadToSupabase(file, uniqueName);
+            const { data, error } = await uploadToSupabase(file, filename);
             
             if (error) {
                 uploadResults.push({
@@ -186,11 +186,9 @@ async function uploadToSupabase(file, filename) {
 // ============================================
 
 function generateUniqueFilename(originalName) {
-    const timestamp = Date.now();
-    const random = Math.random().toString(36).substring(2, 10);
-    const ext = originalName.split('.').pop();
-    const baseName = originalName.replace(/[^a-zA-Z0-9._-]/g, '_').split('.').slice(0, -1).join('.');
-    return `${timestamp}_${random}_${baseName}.${ext}`;
+    // Nettoyer les caractères spéciaux pour la sécurité
+    // Les fichiers avec le même nom s'écraseront (x-upsert: true)
+    return originalName.replace(/[^a-zA-Z0-9._-]/g, '_');
 }
 
 function showError(element, message) {
