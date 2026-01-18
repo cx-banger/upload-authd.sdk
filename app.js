@@ -3,8 +3,64 @@
 // ============================================
 
 const CONFIG = {
-    // Mot de passe pour accéder à l'application
-    PASSWORD: 'admin123',
+    // Configuration des utilisateurs avec leurs dossiers
+    USERS: {
+        'admin': {
+            password: 'admin123',
+            folder: 'admin',
+            displayName: 'Administrateur'
+        },
+        'artiste1': {
+            password: 'motdepasse1',
+            folder: 'artiste1',
+            displayName: 'Artiste 1'
+        },
+        'artiste2': {
+            password: 'motdepasse2',
+            folder: 'artiste2',
+            displayName: 'Artiste 2'
+        },
+        'artiste3': {
+            password: 'motdepasse3',
+            folder: 'artiste3',
+            displayName: 'Artiste 3'
+        },
+        'artiste4': {
+            password: 'motdepasse4',
+            folder: 'artiste4',
+            displayName: 'Artiste 4'
+        },
+        'artiste5': {
+            password: 'motdepasse5',
+            folder: 'artiste5',
+            displayName: 'Artiste 5'
+        },
+        'artiste6': {
+            password: 'motdepasse6',
+            folder: 'artiste6',
+            displayName: 'Artiste 6'
+        },
+        'artiste7': {
+            password: 'motdepasse7',
+            folder: 'artiste7',
+            displayName: 'Artiste 7'
+        },
+        'artiste8': {
+            password: 'motdepasse8',
+            folder: 'artiste8',
+            displayName: 'Artiste 8'
+        },
+        'artiste9': {
+            password: 'motdepasse9',
+            folder: 'artiste9',
+            displayName: 'Artiste 9'
+        },
+        'artiste10': {
+            password: 'motdepasse10',
+            folder: 'artiste10',
+            displayName: 'Artiste 10'
+        }
+    },
     
     // Configuration Supabase
     SUPABASE_URL: 'https://hrzmagjjobctkfxayokt.supabase.co',
@@ -33,6 +89,10 @@ const logoutBtn = document.getElementById('logoutBtn');
 const progressArea = document.getElementById('progressArea');
 const progressBar = document.getElementById('progressBar');
 const progressText = document.getElementById('progressText');
+const userDisplay = document.getElementById('userDisplay');
+
+// Variable globale pour stocker l'utilisateur connecté
+let currentUser = null;
 
 // ============================================
 // GESTION DE L'AUTHENTIFICATION
@@ -40,8 +100,9 @@ const progressText = document.getElementById('progressText');
 
 // Vérifier si déjà connecté au chargement
 window.addEventListener('DOMContentLoaded', () => {
-    const isAuthenticated = localStorage.getItem('authenticated') === 'true';
-    if (isAuthenticated) {
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+        currentUser = JSON.parse(savedUser);
         showUploadPage();
     }
 });
@@ -51,8 +112,22 @@ loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const password = document.getElementById('password').value;
     
-    if (password === CONFIG.PASSWORD) {
-        localStorage.setItem('authenticated', 'true');
+    // Chercher l'utilisateur correspondant au mot de passe
+    let foundUser = null;
+    for (const [username, userData] of Object.entries(CONFIG.USERS)) {
+        if (userData.password === password) {
+            foundUser = {
+                username: username,
+                folder: userData.folder,
+                displayName: userData.displayName
+            };
+            break;
+        }
+    }
+    
+    if (foundUser) {
+        currentUser = foundUser;
+        localStorage.setItem('currentUser', JSON.stringify(foundUser));
         showUploadPage();
     } else {
         showError(loginError, 'Mot de passe incorrect.');
@@ -62,7 +137,8 @@ loginForm.addEventListener('submit', (e) => {
 // Déconnexion
 logoutBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    localStorage.removeItem('authenticated');
+    localStorage.removeItem('currentUser');
+    currentUser = null;
     showLoginPage();
 });
 
@@ -76,6 +152,11 @@ function showLoginPage() {
 function showUploadPage() {
     loginPage.style.display = 'none';
     uploadPage.style.display = 'block';
+    
+    // Afficher le nom de l'utilisateur connecté
+    if (userDisplay && currentUser) {
+        userDisplay.textContent = `Connecté en tant que : ${currentUser.displayName}`;
+    }
 }
 
 // ============================================
@@ -132,7 +213,7 @@ async function uploadFiles(files) {
             } else {
                 uploadResults.push({
                     success: true,
-                    message: `✅ Succès : ${file.name}`
+                    message: `✅ Succès : ${file.name} → ${currentUser.folder}/`
                 });
             }
             
@@ -160,7 +241,9 @@ async function uploadFiles(files) {
 }
 
 async function uploadToSupabase(file, filename) {
-    const url = `${CONFIG.SUPABASE_URL}/storage/v1/object/${CONFIG.BUCKET_NAME}/${filename}`;
+    // Construire le chemin avec le dossier de l'utilisateur
+    const filePath = `${currentUser.folder}/${filename}`;
+    const url = `${CONFIG.SUPABASE_URL}/storage/v1/object/${CONFIG.BUCKET_NAME}/${filePath}`;
     
     const response = await fetch(url, {
         method: 'POST',
